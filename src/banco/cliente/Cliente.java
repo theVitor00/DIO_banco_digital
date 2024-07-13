@@ -38,7 +38,7 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public String gettelefone() {
+    public String getTelefone() {
         return telefone;
     }
 

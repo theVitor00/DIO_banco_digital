@@ -2,78 +2,34 @@ package banco.conta;
 
 import java.util.List;
 
-public class Conta {
+public interface Conta {
 
-    // ATRIBUTOS
-    private static int SEQUENCIAL = 1000;
-    private static final int AGENCIA_PADRAO = 100;
-    protected int agencia;
-    protected int numeroConta;
-    protected double saldo;
-    protected String nome;
-    protected String tipo;
-    List<String> extrato;
-
-
-    // CONSTRUCTOR
-    public Conta(String nome) {
-        this.agencia = Conta.AGENCIA_PADRAO;
-        this.numeroConta = SEQUENCIAL++;
-        this.nome = nome;
-    }
 
     // GETTERS
-    public int getAgencia() {
-        return agencia;
-    }
+    public int getAgencia();
 
-    public int getNumeroConta() {
-        return numeroConta;
-    }
+    public int getNumeroConta();
 
-    public double mostrarSaldo() {
-        return saldo;
-    }
+    public void mostrarSaldo();
 
-    public String getNome() {
-        return nome;
-    }
+    public double getSaldo();
 
-    public String getTipo() {
-        return tipo;
-    }
+
+    public String getNome();
+
+    public String getTipo();
+
 
 
 
     // SETTERS
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public void setNome(String nome);
 
-    public void depositar(double valor) {
-        this.saldo += valor;
-        salvarAtividadeParaExtrato("DEPÓSITO", valor);
-    }
+    public void depositar(double valor);
+    public void sacar(double valor);
 
-    public void sacar(double valor) {
-        if(this.saldo > valor) {
-            this.saldo = this.saldo - valor;
-            System.out.printf("Foi sacado o falor de %.2f Reais.%n", valor);
-            System.out.printf("Novo Saldo: %.2f%n", mostrarSaldo());
-            salvarAtividadeParaExtrato("SAQUE", valor);
-        }
-    }
+    void salvarAtividadeParaExtrato(String transacao, double valor);
 
-    protected void salvarAtividadeParaExtrato(String transacao, double valor) {
-        String item = transacao + "\nValor: " + String.valueOf(valor);
-        extrato.add(item);
-    }
-
-    public void mostrarExtrato() {
-        System.out.println("EXTRATO DA CONTA:");
-        for(String atividade : extrato) {
-            System.out.println(atividade);
-        }
-    }
+    public List<String> getExtrato();
 
 }
